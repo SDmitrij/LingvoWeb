@@ -4,7 +4,7 @@
     {
         public string ToTranslate;
         public string SrcLang;
-        public string DestLang;
+        public string DstLang;
         public bool IsShort;
     }
 }
