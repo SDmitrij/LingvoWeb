@@ -2,6 +2,7 @@
 using LingvoWeb.Service;
 using LingvoWeb.Service.Json;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -15,8 +16,17 @@ namespace LingvoWeb.Controllers
         {
             Translate translator = new Translate();
             await translator.Initialize();
-            string json = await translator.GetTranslationJSON(request.ToTranslate, 
-                (LanguageEnum)request.SrcLang, (LanguageEnum)request.DestLang, request.IsShort);
+            if (!Enum.TryParse(request.SrcLang, out LanguageEnum srcLang)
+            || !Enum.TryParse(request.SrcLang, out LanguageEnum destLang))
+            {
+                return ;
+            }
+            string json = await translator.GetTranslationJSON(
+                request.ToTranslate, 
+                srcLang, 
+                destLang,
+                request.IsShort);
+            
             var transRes = JsonSerializer.Deserialize<JsonShortResult>(json);
             return new JsonResult(transRes);
         }

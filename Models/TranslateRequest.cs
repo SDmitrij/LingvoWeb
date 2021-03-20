@@ -3,8 +3,8 @@
     public class TranslateRequest
     {
         public string ToTranslate;
-        public ushort SrcLang;
-        public ushort DestLang;
+        public string SrcLang;
+        public string DestLang;
         public bool IsShort;
     }
 }
