@@ -2,9 +2,9 @@
 {
     public class TranslateRequest
     {
-        public string ToTranslate;
-        public string SrcLang;
-        public string DestLang;
-        public bool IsShort;
+        public string ToTranslate { get; set; }
+        public string SrcLang { get; set; }
+        public string DestLang { get; set; }
+        public bool IsShort { get; set; }
     }
 }

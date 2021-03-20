@@ -8,25 +8,30 @@ using System.Threading.Tasks;
 
 namespace LingvoWeb.Controllers
 {
-
+    [ApiController]
+    [Route("api/[controller]")]
     public class TranslateController : ControllerBase
     {
-        [HttpGet]
+        [HttpPost("get")]
         public async Task<JsonResult> Get(TranslateRequest request)
         {
             Translate translator = new Translate();
             await translator.Initialize();
             if (!Enum.TryParse(request.SrcLang, out LanguageEnum srcLang)
-            || !Enum.TryParse(request.SrcLang, out LanguageEnum destLang))
+            ||  !Enum.TryParse(request.DestLang, out LanguageEnum destLang))
             {
-                return new JsonResult(new BadRequestResult());
+                var res = new JsonResult("Can't convert string to enum type")
+                {
+                    StatusCode = 400
+                };
+                return res;
             }
             string json = await translator.GetTranslationJSON(
-                request.ToTranslate, 
-                srcLang, 
+                request.ToTranslate,
+                srcLang,
                 destLang,
                 request.IsShort);
-            
+
             var transRes = JsonSerializer.Deserialize<JsonShortResult>(json);
             return (JsonResult)transRes;
         }
