@@ -27,7 +27,7 @@ namespace LingvoWeb.Controllers
                 destLang,
                 request.IsShort);
             
-            var transRes = JsonSerializer.Deserialize<JsonShortResult>(json);
+            var transRes = JsonSerializer.Deserialize<JsonShortResult>(json).Translation.Translation;
             return new JsonResult(transRes);
         }
     }
