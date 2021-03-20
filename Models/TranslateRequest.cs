@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace LingvoWeb.Models
+﻿namespace LingvoWeb.Models
 {
     public class TranslateRequest
     {
+        public string ToTranslate;
+        public ushort SrcLang;
+        public ushort DestLang;
+        public bool IsShort;
     }
 }
