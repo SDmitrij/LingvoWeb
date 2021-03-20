@@ -19,7 +19,7 @@ namespace LingvoWeb.Controllers
             if (!Enum.TryParse(request.SrcLang, out LanguageEnum srcLang)
             || !Enum.TryParse(request.SrcLang, out LanguageEnum destLang))
             {
-                return NoContent();
+                return BadRequest();
             }
             string json = await translator.GetTranslationJSON(
                 request.ToTranslate, 
