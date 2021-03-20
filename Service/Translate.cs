@@ -7,7 +7,7 @@ using System.Web;
 
 namespace LingvoWeb.Service
 {
-    public class Translate
+    public class Translate : ITranslateable
     {
         private const string apiurl = "https://developers.lingvolive.com/";
         private static readonly HttpClient client = new HttpClient();
@@ -22,11 +22,7 @@ namespace LingvoWeb.Service
 
         private string key;
 
-        public Translate()
-        {
-        }
-
-        public async Task<string> GetTranslationJSON(
+        public async Task<string> GetTranslation(
             string toTranslate,
             LanguageEnum srcLang,
             LanguageEnum dstLang,
@@ -75,7 +71,7 @@ namespace LingvoWeb.Service
             }
         }
 
-        public async Task RenewAuthenticationKey()
+        private async Task RenewAuthenticationKey()
         {
             try
             {
