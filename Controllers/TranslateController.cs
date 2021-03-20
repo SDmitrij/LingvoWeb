@@ -19,7 +19,7 @@ namespace LingvoWeb.Controllers
             if (!Enum.TryParse(request.SrcLang, out LanguageEnum srcLang)
             || !Enum.TryParse(request.SrcLang, out LanguageEnum destLang))
             {
-                return ;
+                return new JsonResult(new BadRequestResult());
             }
             string json = await translator.GetTranslationJSON(
                 request.ToTranslate, 
@@ -28,7 +28,7 @@ namespace LingvoWeb.Controllers
                 request.IsShort);
             
             var transRes = JsonSerializer.Deserialize<JsonShortResult>(json);
-            return new JsonResult(transRes);
+            return (JsonResult)transRes;
         }
     }
 }

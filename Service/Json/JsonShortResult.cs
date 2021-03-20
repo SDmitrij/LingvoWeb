@@ -1,4 +1,6 @@
 ﻿using LingvoWeb.Service.Item;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace LingvoWeb.Service.Json
@@ -10,5 +12,10 @@ namespace LingvoWeb.Service.Json
         public string Heading { get; set; }
         public WordListItem Translation { get; set; }
         public ICollection<string> SeeAlso { get; set; }
+
+        public static explicit operator JsonResult(JsonShortResult v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
