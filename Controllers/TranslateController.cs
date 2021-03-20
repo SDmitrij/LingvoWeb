@@ -12,14 +12,14 @@ namespace LingvoWeb.Controllers
     public class TranslateController : ControllerBase
     {
         [HttpGet]
-        public async Task<JsonResult> Get(TranslateRequest request)
+        public async Task<IActionResult> Get(TranslateRequest request)
         {
             Translate translator = new Translate();
             await translator.Initialize();
             if (!Enum.TryParse(request.SrcLang, out LanguageEnum srcLang)
             || !Enum.TryParse(request.SrcLang, out LanguageEnum destLang))
             {
-                return ;
+                return NoContent();
             }
             string json = await translator.GetTranslationJSON(
                 request.ToTranslate, 
