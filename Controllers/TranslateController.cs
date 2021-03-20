@@ -16,34 +16,23 @@ namespace LingvoWeb.Controllers
         {
         }
 
-        //[HttpPost("get")]
-        //public async Task<JsonResult> Get(TranslateRequest request)
-        //{
-        //    await _translator.Initialize();
-        //    if (!Enum.TryParse(request.SrcLang, out LanguageEnum srcLang)
-        //    ||  !Enum.TryParse(request.DestLang, out LanguageEnum destLang))
-        //    {
-        //        var res = new JsonResult("Can't convert string to enum type")
-        //        {
-        //            StatusCode = 400
-        //        };
-        //        return res;
-        //    }
-        //    string json = await _translator.GetTranslation(
-        //        request.ToTranslate,
-        //        srcLang,
-        //        destLang,
-        //        request.IsShort);
-
-        //    var transRes = JsonSerializer.Deserialize<JsonShortResult>(json);
-        //    return (JsonResult)transRes;
-        //}
-
         [HttpGet("get")]
-        public async Task<JsonResult> Get(string toTran)
+        public async Task<JsonResult> GetTranslation(string text, string srcLang, string dstLang, bool isShort)
         {
-            string res = await Translator.GetTranslation(toTran, LanguageEnum.En, LanguageEnum.Ru, true);
-            return new JsonResult(res);
+            if (!Enum.TryParse(srcLang, out LanguageEnum srcLangEnum)
+            || !Enum.TryParse(dstLang, out LanguageEnum dstLangEnum))
+            {
+                var res = new JsonResult("Can't find required language.")
+                {
+                    StatusCode = 400
+                };
+                return res;
+            }
+            string json =
+                await Translator.GetTranslation(text, srcLangEnum, dstLangEnum, isShort);
+
+            var transRes = JsonSerializer.Deserialize<JsonShortResult>(json).Translation.Translation;
+            return new JsonResult(transRes);
         }
     }
 }
