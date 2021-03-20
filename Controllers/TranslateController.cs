@@ -12,11 +12,8 @@ namespace LingvoWeb.Controllers
     [Route("api/[controller]")]
     public class TranslateController : ControllerBase
     {
-        private readonly ITranslateable _translator;
-
-        public TranslateController(ITranslateable translator)
+        public TranslateController()
         {
-            _translator = translator;
         }
 
         //[HttpPost("get")]
@@ -45,8 +42,7 @@ namespace LingvoWeb.Controllers
         [HttpGet("get")]
         public async Task<JsonResult> Get(string toTran)
         {
-            await _translator.Initialize();
-            string res = await _translator.GetTranslation(toTran, LanguageEnum.En, LanguageEnum.Ru, true);
+            string res = await Translator.GetTranslation(toTran, LanguageEnum.En, LanguageEnum.Ru, true);
             return new JsonResult(res);
         }
     }

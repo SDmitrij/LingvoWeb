@@ -4,7 +4,7 @@
     {
         public string ToTranslate { get; set; }
         public string SrcLang { get; set; }
-        public string DestLang { get; set; }
+        public string DstLang { get; set; }
         public bool IsShort { get; set; }
     }
 }

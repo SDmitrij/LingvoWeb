@@ -19,7 +19,7 @@
     },
     "LingvoWeb": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "lingvo",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {

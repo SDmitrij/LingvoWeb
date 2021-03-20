@@ -7,22 +7,17 @@ using System.Web;
 
 namespace LingvoWeb.Service
 {
-    public class Translate : ITranslateable
+    public static class Translator
     {
         private const string apiurl = "https://developers.lingvolive.com/";
         private static readonly HttpClient client = new HttpClient();
 
-#if DEBUG
-        private const string appKeyPath = @"../../../appkey";
-        private const string keyPath = @"../../../key";
-#else
         private const String appKeyPath = @"appkey";
         private const String keyPath = @"key";
-#endif
 
-        private string key;
+        private static string key;
 
-        public async Task<string> GetTranslation(
+        public static async Task<string> GetTranslation(
             string toTranslate,
             LanguageEnum srcLang,
             LanguageEnum dstLang,
@@ -53,7 +48,7 @@ namespace LingvoWeb.Service
             }
         }
 
-        public async Task Initialize()
+        public static async Task Initialize()
         {
             key = ReadKey();
 
@@ -71,7 +66,7 @@ namespace LingvoWeb.Service
             }
         }
 
-        private async Task RenewAuthenticationKey()
+        private static async Task RenewAuthenticationKey()
         {
             try
             {
@@ -93,7 +88,7 @@ namespace LingvoWeb.Service
             }
         }
 
-        private async Task WriteKey(string key)
+        private static async Task WriteKey(string key)
         {
             try
             {
@@ -107,7 +102,7 @@ namespace LingvoWeb.Service
             }
         }
 
-        private string ReadKey()
+        private static string ReadKey()
         {
             try
             {
@@ -122,7 +117,7 @@ namespace LingvoWeb.Service
             }
         }
 
-        private string GetAppKey()
+        private static string GetAppKey()
         {
             try
             {
