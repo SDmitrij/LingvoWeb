@@ -11,10 +11,6 @@ namespace LingvoWeb.Controllers
     [Route("api/[controller]")]
     public class TranslateController : ControllerBase
     {
-        public TranslateController()
-        {
-        }
-
         [HttpGet("get")]
         public async Task<JsonResult> GetTranslation(string text, string srcLang, string dstLang, bool isShort = true)
         {
@@ -47,9 +43,11 @@ namespace LingvoWeb.Controllers
 
             return new JsonResult(transRes);
         }
+
         private bool ValidateTranslationRequest (string text, string srcLang, string dstLang)
         {
-            return !string.IsNullOrWhiteSpace(text) &&
+            return 
+                !string.IsNullOrWhiteSpace(text) &&
                 !string.IsNullOrWhiteSpace(srcLang) &&
                 !string.IsNullOrWhiteSpace(dstLang);
         }

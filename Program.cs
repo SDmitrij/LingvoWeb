@@ -10,7 +10,6 @@ namespace LingvoWeb
         public static async Task Main(string[] args)
         {
             await Translator.Initialize();
-
             CreateHostBuilder(args).Build().Run();
         }
 
