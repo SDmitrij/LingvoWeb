@@ -76,7 +76,6 @@ namespace LingvoWeb.Service
                 var response = await client.PostAsync(apiurl + "api/v1.1/authenticate", httpContent);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                //Console.WriteLine(responseBody);
                 await WriteKey(responseBody);
                 client.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue("Bearer", key);

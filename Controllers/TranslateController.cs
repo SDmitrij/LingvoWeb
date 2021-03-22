@@ -1,5 +1,6 @@
 ﻿using LingvoWeb.Service;
 using LingvoWeb.Service.Json;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Text.Json;
@@ -7,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace LingvoWeb.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TranslateController : ControllerBase
+    [AllowAnonymous]
+    public class TranslateController : BaseController
     {
         [HttpGet("get")]
         public async Task<JsonResult> GetTranslation(string text, string srcLang, string dstLang, bool isShort = true)
