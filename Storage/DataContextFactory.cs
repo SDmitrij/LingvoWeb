@@ -8,7 +8,7 @@ namespace LingvoWeb.Storage
         public DataContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            optionsBuilder.UseSqlite("Data Source = daily.db");
+            optionsBuilder.UseSqlite("Data Source = app.db");
             return new DataContext(optionsBuilder.Options);
         }
     }
