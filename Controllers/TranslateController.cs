@@ -39,9 +39,9 @@ namespace LingvoWeb.Controllers
             string json =
                 await Translator.GetTranslation(text, srcLangEnum, dstLangEnum, isShort);
 
-            var transRes = JsonSerializer.Deserialize<JsonShortResult>(json).Translation.Translation;
+            //var transRes = JsonSerializer.Deserialize<JsonShortResult>(json);
 
-            return new JsonResult(transRes);
+            return new JsonResult(json);
         }
 
         private bool ValidateTranslationRequest (string text, string srcLang, string dstLang)
